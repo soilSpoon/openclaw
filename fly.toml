@@ -1,8 +1,8 @@
 # OpenClaw Fly.io deployment configuration
 # See https://fly.io/docs/reference/configuration/
 
-app = "openclaw"
-primary_region = "iad" # change to your closest region
+app = 'openclaw-ilr4ig'
+primary_region = 'nrt'
 
 [build]
 dockerfile = "Dockerfile"
@@ -20,14 +20,16 @@ app = "node dist/index.js gateway --allow-unconfigured --port 3000 --bind lan"
 [http_service]
 internal_port = 3000
 force_https = true
-auto_stop_machines = false # Keep running for persistent connections
+auto_stop_machines = "off" # Keep running for persistent connections
 auto_start_machines = true
 min_machines_running = 1
 processes = ["app"]
 
 [[vm]]
-size = "shared-cpu-2x"
-memory = "2048mb"
+memory = '512mb'
+cpu_kind = 'shared'
+cpus = 1
+memory_mb = 512
 
 [mounts]
 source = "openclaw_data"
